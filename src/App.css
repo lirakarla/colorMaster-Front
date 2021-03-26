@@ -1,0 +1,88 @@
+#root{
+  height: 100vh ;
+}
+
+.root{
+  min-height: 100vh ;
+}
+
+.view{
+  min-height: 100vh;
+  background-color: #F0EADE;
+}
+
+.login-card{
+  background-color: rgba(255,255, 255, 0.5);
+  border-radius: 15px;
+  padding: 10px 60px;
+  text-align: center;
+
+}
+.user-icon{
+  background-color: #BFAB99;
+  border-radius: 100%;
+  padding: 20px;
+}
+
+.ant-form-item{
+  margin: 0;
+}
+.ant-btn-primary {
+background-color: #af7745de!important;
+border-color:  #D9AB73 !important;
+border-radius: 10px !important;
+}
+
+.ant-btn-link {
+  color: #707070 !important;
+}
+
+body{
+  font-family: 'Poppins', sans-serif !important;
+  background-color:  #F0EADE!important ;
+}
+
+.menu{
+  padding: 10px;
+  background-color: white !important;
+
+}
+.menu_title{
+  font-size: 17px !important;
+  margin:0px 30px !important;
+}
+.user-icon-menu{
+  background-color: #BFAB99;
+  border-radius: 100%;
+  padding: 10px;
+}
+
+.paleta-container{
+  width: 80%;
+  height: 60%;
+  background-color: white;
+  margin: 10% auto;
+  border-radius: 20px;
+}
+
+.paleta-top{
+  background-color: #A9A9A9;
+  border-radius: 20px 20px 0px 0px;
+  padding: 10px;
+  
+}
+
+.boton-paleta{
+  border-color: #BFAB99 !important;
+  border-width: 2px!important;
+  color:#BFAB99 !important;
+}
+
+.boton-guardar{
+  background-color: #BFAB99 !important;
+  color:white !important;
+}
+
+.inner-container{
+  padding: 2% 10%;
+}
