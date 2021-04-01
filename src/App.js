@@ -17,6 +17,9 @@ function App() {
           <Route path="/login" exact>
             <LoginView />
           </Route>
+          <Route path="/paleta/:idPaleta" exact>
+            <PaletaView />
+          </Route>
           <Route path="/paleta" exact>
             <PaletaView />
           </Route>

@@ -59,9 +59,9 @@ body{
 
 .paleta-container{
   width: 80%;
-  height: 60%;
+  height: 80%;
   background-color: white;
-  margin: 10% auto;
+  margin: 3% auto;
   border-radius: 20px;
 }
 
@@ -77,6 +77,11 @@ body{
   border-width: 2px!important;
   color:#BFAB99 !important;
 }
+.boton-paleta:hover{
+  background-color: #BFAB99 !important;
+  color:white  !important;
+}
+
 
 .boton-guardar{
   background-color: #BFAB99 !important;
@@ -85,4 +90,17 @@ body{
 
 .inner-container{
   padding: 2% 10%;
+}
+
+.colorBlock{
+  height: 200px;
+  display: inline-block;
+  width: 20%;
+}
+
+.colorHex{
+  display: inline-block;
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-left:25%
 }
