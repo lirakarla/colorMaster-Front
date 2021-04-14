@@ -2,6 +2,7 @@ import Logo from "./Color master Logo.png";
 import { Row, Col, Image } from "antd";
 import LoginCard from "./LoginCard"
 
+
 const LoginView= () => {
   return (
     <Row className={"view"} justify="space-around" align="middle">

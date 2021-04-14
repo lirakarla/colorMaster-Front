@@ -96,6 +96,16 @@ body{
   height: 200px;
   display: inline-block;
   width: 20%;
+  transition: all .3s ease-in-out;
+
+}
+
+.colorBlock:hover{
+  box-shadow: 0 3px 5px 0 rgb(46 61 73 / 30%);
+    transform: scale(1.02);
+    z-index: 1;
+    cursor: pointer;
+
 }
 
 .colorHex{
@@ -104,3 +114,84 @@ body{
   margin-right: 20px;
   margin-left:25%
 }
+
+.paletaCard{
+  height: 150px;
+  border-radius: 10px;
+  background-color: white;
+  width: 220px;
+  position: relative;
+  padding: 10px 0px;
+}
+
+.paletaCard-top{
+  position: absolute;
+  top:0;
+  background-color: #A9A9A9;
+  width: 100%;
+  border-radius: 10px 10px 0px 0px;
+  text-align: center;
+  vertical-align: middle !important;
+
+}
+
+.paletaCard-top p{
+  text-align: center;
+  margin: auto;
+  display: inline-block;
+  color: white;
+}
+
+.paletaPuntitos{
+  position: absolute;
+  right: 0;
+  top: 25%;
+  color:white !important;
+}
+
+.paletaCard-colores{
+  width: 20%;
+  height: 80%;
+  background-color: #BFAB99;
+  display: inline-block;
+  border-radius: 10px 10px 0px 0px;
+  transition: all .3s ease-in-out;
+}
+
+.paletaCard-colores:hover{
+  box-shadow: 0 3px 5px 0 rgb(46 61 73 / 30%);
+    transform: scale(1.02);
+    z-index: 1;
+    cursor: pointer;
+
+}
+
+.paletaCard-categoria{
+  font-size: 10px;
+  border: 1px solid #A9A9A9;
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.paletaCard-opcion{
+  margin:5px 0px;
+  text-align: left;
+  vertical-align: middle;
+  display: flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size: 11px;
+  text-decoration: none !important;
+  color: inherit;
+}
+
+.paletaCard-opIcon{
+  float: right;
+  vertical-align: middle;
+
+}
+
+.paletaCard-eliminar{
+  color:red;
+}
+

@@ -4,7 +4,7 @@ import {UserOutlined} from "@ant-design/icons";
 
 const{Text}=Typography;
 
-const Menu = () => {
+const Menu = ({pagina}) => {
   return (
     <Row className="menu" align="middle">
     <Col span={2}>
@@ -15,14 +15,20 @@ const Menu = () => {
        />
     </Col>
     <Col span={9}>
-       <Text className="menu_title">
-         Explorar
+       <Text strong={pagina==="explorar"} className="menu_title">
+        <a href={"/explorar"} style={{color:"inherit"}}>
+          Explorar
+        </a>
        </Text>
-       <Text className="menu_title">
-       Mis Paletas
+       <Text strong={pagina==="mispaletas"}className="menu_title">
+       <a href={"/mispaletas"} style={{color:"inherit"}}>
+           Mis Paletas
+        </a>
        </Text> 
-       <Text className="menu_title">
-         Explorar
+       <Text strong={pagina==="favoritos"}className="menu_title">
+          <a href={"/favoritos"} style={{color:"inherit"}}>
+            Favoritos
+         </a>
          </Text> 
     </Col>
     

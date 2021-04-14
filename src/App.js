@@ -5,6 +5,9 @@ import LoginView from "./LoginView";
 import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SignupView from "./SignupView";
 import PaletaView from "./PaletaView";
+import MisPaletasView from "./MisPaletasView";
+import ExplorarView from "./ExplorarView";
+import FavoritosView from "./FavoritosView";
 
 function App() {
   return (
@@ -22,6 +25,15 @@ function App() {
           </Route>
           <Route path="/paleta" exact>
             <PaletaView />
+          </Route>
+          <Route path="/mispaletas" exact>
+            <MisPaletasView />
+          </Route>
+          <Route path="/explorar" exact>
+            <ExplorarView />
+          </Route>
+          <Route path="/favoritos" exact>
+            <FavoritosView />
           </Route>
         </Switch>
       </div>

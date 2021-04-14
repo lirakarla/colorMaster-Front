@@ -1,12 +1,14 @@
 import Logo from "./Color master Logo.png";
 import { Input, Image, Col, Row, Button, Typography,Select, message} from "antd";
-import Menu from "./Menu";
+  import Menu from "./Menu";
 import {InteractionOutlined, EditOutlined, UnlockOutlined,LockOutlined, Loading3QuartersOutlined} from "@ant-design/icons";
 import bestContrast from 'get-best-contrast-color';
 import{ChromePicker} from 'react-color';
 import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom"; //libreria de navegacion
 import axios from "axios";
+import copy from "clipboard-copy";
+
 
 const { Option } = Select;
 const categoriasOriginales = [
@@ -19,7 +21,7 @@ const categoriasOriginales = [
     idCategoria: 1,
   },
   {
-    nombre: "Colores Vividos",
+    nombre: "Colores Vivos",
     idCategoria: 2,
   },
   {
@@ -181,7 +183,35 @@ const PaletaView= () => {
     }
   },[])//parte nueva de react
 
+  const handleSelect=(option)=>{
+    console.log(option);
+    console.log(categorias);
+    const categoria= categoriasOriginales.find(o=>o.idCategoria===Number(option));
+
+    for (let index = 0; index < categorias.length; index++) {
+      const element = categorias[index];
+      
+      //va a hacer que se rompa el set categorias y no agregue la misma categoria
+      if(element.nombre ===categoria.nombre){
+        return
+      }   
+    }
  
+    //arreglo de objetos
+    setCategorias([...categorias, categoria])
+  }
+
+  const handleDeSelect=(option)=>{
+    console.log(option)
+    setCategorias([...categorias].filter(value =>value.nombre !== option))
+  }
+
+  //sirve para dar click y copiar el color
+  const handleColorClick=(color)=>{
+    copy(color)
+    message.success("El código del color se ha copiado")
+  }
+
   return (
   <div style={{height:"100%"}}>
    <Menu>
@@ -212,7 +242,7 @@ const PaletaView= () => {
        {colores.map((objeto,i)=>{
          const colorTexto=bestContrast(objeto.color,["white", "black"]); 
          return (
-          <div  className="colorBlock" style={{backgroundColor: objeto.color}}>
+          <div onClick={()=>handleColorClick(objeto.color)} className="colorBlock" style={{backgroundColor: objeto.color}}>
             <span className="colorHex" style={{color:colorTexto}}>
               {
                 objeto.color
@@ -244,8 +274,8 @@ const PaletaView= () => {
       placeholder="Please select"
       value={categorias.map(c=>c.nombre)}
       //... se sign. para poner los datos
-      onSelect={(option)=>setCategorias([...categorias, categoriasOriginales.find(o=>o.idCategoria===Number(option))])}
-      onDeselect={(option)=>setCategorias([...categorias].filter(value =>value.idCategoria !== Number(option)))}
+      onSelect={handleSelect}
+      onDeselect={handleDeSelect}
       onClear={(option)=>setCategorias([])}
     >
       {/* CategoriasOriginales son todas las que existen en la bd  */}
