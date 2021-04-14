@@ -5,6 +5,7 @@ import {UserOutlined} from "@ant-design/icons";
 const{Text}=Typography;
 
 const Menu = ({pagina}) => {
+const usuario=JSON.parse(localStorage.getItem("user"));
   return (
     <Row className="menu" align="middle">
     <Col span={2}>
@@ -34,8 +35,8 @@ const Menu = ({pagina}) => {
     
     <Col span={2} offset={11} align="middle">
     <UserOutlined className="user-icon-menu" style={{color: "white", fontSize: 25, textAlign:'center', display:"inline-block"}}  />
-    <Text >
-         Fernanditoo
+    <Text style={{display:"block"}} >
+        {usuario.username}
          </Text> 
     </Col>
   </Row>

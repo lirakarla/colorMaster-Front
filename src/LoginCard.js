@@ -1,7 +1,8 @@
 import { Row, Col, Form, Button, Input, message } from "antd";
-import {UserOutlined} from "@ant-design/icons";
 import { useState } from "react";
 import axios from "axios";
+import {useHistory} from "react-router-dom";
+import {UserOutlined, EyeInvisibleOutlined, EyeTwoTone} from "@ant-design/icons";
 
 const layout = {
     labelCol: {
@@ -20,7 +21,7 @@ const layout = {
 
 const LoginCard= () => {
 const [loading, setLoading] = useState(false);
-
+const history=useHistory();
 const [form] = Form.useForm();
 
 const onFinish = (values) => {
@@ -40,6 +41,7 @@ const onFinish = (values) => {
         setLoading(false);
         //libreria para guardar info del usuario
         localStorage.setItem("user", JSON.stringify(res.data.usuario))
+        history.push("/explorar")
       })
       .catch(error=>{
         if(error.response.status===401){
@@ -77,8 +79,11 @@ const onFinish = (values) => {
       <Form.Item
         name="contrasenia"
         label="Contraseña" 
+        
       >
-           <Input />
+            <Input.Password
+                iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+              />
         
       </Form.Item>
      

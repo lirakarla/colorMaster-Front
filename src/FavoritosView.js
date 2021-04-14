@@ -70,7 +70,8 @@ const FavoritosView = () => {
 
  const handleFavoritoUpdate=(idPaleta,favorito)=>{
         setLoading(true)
-        axios.get("http://localhost:4000/paleta/favoritos/"+2).then((res)=>{
+        const usuario=JSON.parse(localStorage.getItem("user"));
+        axios.get("http://localhost:4000/paleta/favoritos/"+usuario.idUsuario).then((res)=>{
         setPaletas(res.data)
         setLoading(false);
       })
@@ -100,8 +101,12 @@ const FavoritosView = () => {
 
   //eso corre una vez
   useEffect(()=>{
+    const usuario=JSON.parse(localStorage.getItem("user"));
+    if (!usuario) {
+      return  history.push("/login")
+    }
 
-      axios.get("http://localhost:4000/paleta/favoritos/"+2).then((res)=>{
+      axios.get("http://localhost:4000/paleta/favoritos/"+usuario.idUsuario).then((res)=>{
         setPaletas(res.data)
         setLoading(false);
       })

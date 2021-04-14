@@ -8,6 +8,7 @@ import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom"; //libreria de navegacion
 import axios from "axios";
 import copy from "clipboard-copy";
+import {useHistory} from "react-router-dom";
 
 
 const { Option } = Select;
@@ -69,9 +70,9 @@ const crearPaleta=(nombre,colores,categorias,setLoading,setIdPaleta)=>{
   }
   setLoading(true);
   //agarro el id usuario desde que el usuario inicio sesion
-  const idUsuario=2//JSON.parse(localStorage.getItem("user")).idUsuario
+  const usuario=JSON.parse(localStorage.getItem("user"))
   axios.post("http://localhost:4000/paleta", {
-    categorias, colores, nombre, idUsuario
+    categorias, colores, nombre, idUsuario:usuario.idUsuario
   }).then((res)=>{
     setLoading(false);
     message.success("La paleta se ha guardado con éxito")
@@ -86,9 +87,9 @@ const actualizarPaleta=(nombre,colores,categorias,setLoading,idPaleta)=>{
   }
   setLoading(true);
   //agarro el id usuario desde que el usuario inicio sesion
-  const idUsuario=2//JSON.parse(localStorage.getItem("user")).idUsuario
+  const usuario=JSON.parse(localStorage.getItem("user"))
   axios.put("http://localhost:4000/paleta", {
-    categorias, colores, nombre, idUsuario,idPaleta
+    categorias, colores, nombre, idUsuario:usuario.idUsuario,idPaleta
   }).then((res)=>{
     setLoading(false);
     message.success("La paleta se ha guardado con éxito")
@@ -159,6 +160,8 @@ const PaletaView= () => {
   //para los colores random
   const [colores,setColores]=useState([])
 
+  const history=useHistory();
+
   const[idPaleta,setIdPaleta]=useState(params.idPaleta)
 
   const [categorias,setCategorias]=useState([])
@@ -170,11 +173,17 @@ const PaletaView= () => {
   const[loading,setLoading]=useState(false)
   //eso corre una vez
   useEffect(()=>{
+    const usuario=localStorage.getItem("user");
+    if (!usuario) {
+        history.push("/login")
+    }
+
     if(idPaleta===undefined){
      
      setColores(generarRandomColores())
     } 
     else{
+
       axios.get("http://localhost:4000/paleta/"+idPaleta).then((res)=>{
         setCategorias(res.data.categorias)
         setColores(res.data.colores)

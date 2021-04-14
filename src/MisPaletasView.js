@@ -94,9 +94,13 @@ const MisPaletasView = () => {
 
   //eso corre una vez
   useEffect(()=>{
-      //const idUsuario=localStorage.getItem("user").idUsuario;
+      const usuario=JSON.parse(localStorage.getItem("user"));
       //cambiaaaaaaaaaaaaaaar despues
-      axios.get("http://localhost:4000/paleta/usuario/"+2).then((res)=>{
+      if (!usuario) {
+
+      return  history.push("/login")
+    }
+      axios.get("http://localhost:4000/paleta/usuario/"+usuario.idUsuario).then((res)=>{
         setPaletas(res.data)
         setLoading(false);
       })

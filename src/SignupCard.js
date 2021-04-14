@@ -24,13 +24,21 @@ const SignupCard= () => {
 
   const [form] = Form.useForm();
 
+  const validateEmail=(email)=> {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
   const onFinish = (values) => {
       console.log(values);
       if (values.usuario.length<3) {
         return message.error("Nombre de usuario muy corto")  
       }
+      else if(!validateEmail(values.correo)){
+        return message.warning("Revisa el correo, no es válido")  
+      }
       else if(values.contrasenia!==values.contrasenia2){
-        return message.error("Las contrseñas no coinciden")  
+        return message.error("Las contraseñas no coinciden")  
       }
       else if(values.contrasenia.length<6){
         return message.error("La contraseña es muy corta")  
@@ -38,7 +46,7 @@ const SignupCard= () => {
       else{
         setLoading(true);
         axios.post("http://localhost:4000/usuario",{
-          username: values.usuario, correo:"periquito@gmail.com", contrasena:values.contrasenia
+          username: values.usuario, correo:values.correo, contrasena:values.contrasenia
         }).then((res)=>{
           setLoading(false);
           localStorage.setItem("user", JSON.stringify(res.data.usuario))
@@ -73,6 +81,12 @@ const SignupCard= () => {
         <Form.Item
           name="usuario"
           label="Nombre de Usuario"
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="correo"
+          label="Correo Electrónico"
         >
           <Input />
         </Form.Item>

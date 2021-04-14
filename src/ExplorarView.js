@@ -70,7 +70,8 @@ const ExplorarView = () => {
 
  const handleFavoritoUpdate=(idPaleta,favorito)=>{
         setLoading(true)
-        axios.get("http://localhost:4000/paleta/explorar/"+2).then((res)=>{
+        const usuario=JSON.parse(localStorage.getItem("user"));
+        axios.get("http://localhost:4000/paleta/explorar/"+usuario.idUsuario).then((res)=>{
         setPaletas(res.data)
         setLoading(false);
       })
@@ -100,8 +101,11 @@ const ExplorarView = () => {
 
   //eso corre una vez
   useEffect(()=>{
-
-      axios.get("http://localhost:4000/paleta/explorar/"+2).then((res)=>{
+    const usuario=JSON.parse(localStorage.getItem("user"));
+    if (!usuario) {
+        return history.push("/login")
+    }
+      axios.get("http://localhost:4000/paleta/explorar/"+usuario.idUsuario).then((res)=>{
         setPaletas(res.data)
         setLoading(false);
       })
