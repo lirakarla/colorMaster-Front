@@ -122,6 +122,7 @@ body{
   width: 220px;
   position: relative;
   padding: 10px 0px;
+  margin-left: 5.6666667% !important;
 }
 
 .paletaCard-top{
@@ -194,4 +195,5 @@ body{
 .paletaCard-eliminar{
   color:red;
 }
+
 

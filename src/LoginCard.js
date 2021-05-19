@@ -88,7 +88,7 @@ const onFinish = (values) => {
       </Form.Item>
      
       <Form.Item {...tailLayout}>
-        <Button type="link" htmlType="submit" href="/" disabled={loading} >
+        <Button type="link" htmlType="submit" href="/" disabled={loading} style={{marginRight:"50px"}}>
         Regístrate
         </Button>
 

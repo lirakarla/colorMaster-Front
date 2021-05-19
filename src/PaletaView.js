@@ -217,6 +217,8 @@ const PaletaView= () => {
 
   //sirve para dar click y copiar el color
   const handleColorClick=(color)=>{
+    if(editableActual !== null)
+      return;
     copy(color)
     message.success("El código del color se ha copiado")
   }
@@ -257,7 +259,12 @@ const PaletaView= () => {
                 objeto.color
               }
             </span>
-            <EditOutlined onClick={()=>editableActual === i ?setEditableActual(null) : setEditableActual(i)}  style={{color:colorTexto}}/>
+            <EditOutlined onClick={(e)=> {
+                editableActual === i ?setEditableActual(null) : setEditableActual(i);
+                e.stopPropagation();
+              }}
+             style={{color:colorTexto}}
+             />
             {i===editableActual && 
               <div style={{position: 'absolute', zIndex: 1}} > 
                 <ChromePicker color={objeto.color} onChangeComplete={(color)=>setColores(changeColor(i, colores, color))}  /> 
@@ -265,14 +272,20 @@ const PaletaView= () => {
               
             {
               objeto.locked ?
-               <LockOutlined onClick={()=>setColores(lockColor(i, colores))} style={{color:colorTexto, display:"block", marginTop:"80%", marginRight:"60%"}}/>
+               <LockOutlined onClick={(e)=> {
+                 setColores(lockColor(i, colores))
+                 e.stopPropagation();
+                }} style={{color:colorTexto, display:"block", marginTop:"80%", marginRight:"60%"}}/>
               :
-              <UnlockOutlined onClick={()=>setColores(lockColor(i, colores))} style={{color:colorTexto, display:"block", marginTop:"80%", marginRight:"60%"}}/>
+              <UnlockOutlined onClick={(e)=> {
+                setColores(lockColor(i, colores));
+                e.stopPropagation();
+              }} style={{color:colorTexto, display:"block", marginTop:"80%", marginRight:"60%"}}/>
             }
           </div>
          )
        })}
-       <Title level={5} style={{marginTop:"30px"}}>
+       <Title level={5} style={{marginTop:"100px"}}>
         
        Categorías
        </Title>

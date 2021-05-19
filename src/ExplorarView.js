@@ -117,7 +117,7 @@ const ExplorarView = () => {
   return (
     <div style={{ height: "100%" }}>
       <Menu pagina={"explorar"}></Menu>
-      <Row style={{padding:"20px"}}>
+      <Row style={{padding:"20px" }}>
         <Col span={4}>
           <Select
             

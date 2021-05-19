@@ -2,6 +2,7 @@ import { Row, Col, Form, Button, Input, message } from "antd";
 import {UserOutlined, EyeInvisibleOutlined, EyeTwoTone} from "@ant-design/icons";
 import { useState } from "react";
 import axios from "axios";
+import {useHistory} from "react-router-dom";
 
 
 const layout = {
@@ -23,6 +24,7 @@ const SignupCard= () => {
   const [loading, setLoading] = useState(false);
 
   const [form] = Form.useForm();
+  const history=useHistory();
 
   const validateEmail=(email)=> {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -50,6 +52,7 @@ const SignupCard= () => {
         }).then((res)=>{
           setLoading(false);
           localStorage.setItem("user", JSON.stringify(res.data.usuario))
+          history.push("/explorar")
         })
         .catch(e=>{
           if(e.response.status===409){
@@ -112,10 +115,14 @@ const SignupCard= () => {
       
         <Form.Item {...tailLayout}>
 
+        <Button type="link" htmlType="submit" href="/login" disabled={loading} style={{marginRight:"50px"}}>
+            Iniciar Sesión
+        </Button>
 
           <Button type="primary" htmlType="submit" loading={loading} >
             Regístrate
           </Button>
+          
 
         </Form.Item>
       </Form>
