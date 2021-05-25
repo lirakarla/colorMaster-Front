@@ -35,6 +35,10 @@ function App() {
           <Route path="/favoritos" exact>
             <FavoritosView />
           </Route>
+          <Route>
+            <h1>Parece que te has perdido de página</h1>
+            <h3>Vuelve a: <a href="http://localhost:3000/login#">Login</a></h3>
+          </Route>
         </Switch>
       </div>
     </Router>

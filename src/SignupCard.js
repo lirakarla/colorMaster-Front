@@ -3,6 +3,7 @@ import {UserOutlined, EyeInvisibleOutlined, EyeTwoTone} from "@ant-design/icons"
 import { useState } from "react";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
+import {withoutEmoji} from "emoji-aware";
 
 
 const layout = {
@@ -33,17 +34,29 @@ const SignupCard= () => {
 
   const onFinish = (values) => {
       console.log(values);
-      if (values.usuario.length<3) {
+      if(values.usuario===undefined || values.usuario.length<1 || values.contrasenia===undefined){
+        return message.error("Es necesario completar todos los campos")
+      }
+      else if (values.usuario.length<3) {
         return message.error("Nombre de usuario muy corto")  
       }
+
+      else if (values.usuario.length>20) {
+        return message.error("Nombre de usuario muy largo")  
+      }
+      
+      
       else if(!validateEmail(values.correo)){
         return message.warning("Revisa el correo, no es válido")  
       }
       else if(values.contrasenia!==values.contrasenia2){
         return message.error("Las contraseñas no coinciden")  
       }
-      else if(values.contrasenia.length<6){
+      else if(values.contrasenia.length<6 ){
         return message.error("La contraseña es muy corta")  
+      }
+      else if(values.usuario!==withoutEmoji(values.usuario).join("") || values.contrasenia!==withoutEmoji(values.contrasenia).join("")){
+        return message.error("Hay campos que contiene caracteres inválidos")  
       }
       else{
         setLoading(true);

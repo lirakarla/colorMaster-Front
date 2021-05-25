@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom"; //libreria de navegacion
 import axios from "axios";
 import copy from "clipboard-copy";
 import {useHistory} from "react-router-dom";
+import {withoutEmoji} from "emoji-aware";
 
 
 const { Option } = Select;
@@ -68,6 +69,10 @@ const crearPaleta=(nombre,colores,categorias,setLoading,setIdPaleta)=>{
   if (nombre.length<3 || nombre.length>15) {
     return message.warning("El nombre debe de tener entre 3 y 15 caracteres")  
   }
+  else if(nombre!==withoutEmoji(nombre).join("")){
+      return message.error("El nombre contiene caracteres inválidos")  
+    }
+  
   setLoading(true);
   //agarro el id usuario desde que el usuario inicio sesion
   const usuario=JSON.parse(localStorage.getItem("user"))
@@ -84,6 +89,9 @@ const crearPaleta=(nombre,colores,categorias,setLoading,setIdPaleta)=>{
 const actualizarPaleta=(nombre,colores,categorias,setLoading,idPaleta)=>{
   if (nombre.length<3 || nombre.length>15) {
     return message.warning("El nombre debe de tener entre 3 y 15 caracteres")  
+  }
+  else if(nombre!==withoutEmoji(nombre).join("")){
+    return message.error("El nombre contiene caracteres inválidos")  
   }
   setLoading(true);
   //agarro el id usuario desde que el usuario inicio sesion
